@@ -1,0 +1,10 @@
+avanzar
+retroceder
+detenerse
+izquierda
+derecha
+prender
+apagar
+cocina
+foco
+valor
