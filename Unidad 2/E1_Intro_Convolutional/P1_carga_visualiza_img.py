@@ -3,9 +3,10 @@
 #from tensorflow.keras.utils import load_img  #alternative 1
 from keras.utils import load_img, img_to_array #alternative 2
 
-largo, alto = 75, 75
-#file = './FIT V.jpg'
-file = './ImagenGatoEuropeo.png'
+largo, alto = 300, 300
+#file = 'FIT_logo_vertical.png'
+file = 'ImagenGatoEuropeo.png'
+#file = "./Logo_5Aniversario.png"
 
 img = load_img(file, target_size = (largo, alto)
              ,color_mode = "grayscale"

@@ -14,11 +14,11 @@ data_entrenamiento = "../E2_ConvolutionalNeuronalNetwork/F1-Entrenamiento"
 data_validacion = "../E2_ConvolutionalNeuronalNetwork/F2-Validacion"
 
 #Parametros
-epocas = 50
-alto, largo = 300, 300 #dimensiones de las imagenes. Para redimenzionar
+epocas = 20 #
+alto, largo = 150, 150 # dimensiones de las imagenes. Para redimenzionar
 batch_size = 5 #numero de imagenes que se mandara a procesar por cada paso
-pasos = 30  # 100imagenes / batch => max pasos
-pasos_validacion = 10 # 50imagenes /batcg => max pasos validacion
+pasos = 40  # 100imagenes / batch => max pasos -> 350/5 = 70
+pasos_validacion = 12 # 50imagenes /batch => max pasos validacion
 
 #To make sure that you have "at least steps_per_epoch * epochs batches", set the steps_per_epoch to
 #steps_per_epoch = len(X_train)//batch_size
@@ -27,18 +27,17 @@ pasos_validacion = 10 # 50imagenes /batcg => max pasos validacion
 
 kernel1 = (3, 3)
 kernel2 = (2, 2)
-kernel3 = (3, 3)
+#kernel3 = (3, 3)
 
-tot_kernels1 = 32  #8 ....
-tot_kernels2 = 64
-tot_kernels3 = 128
+tot_kernels1 = 16  #8 ....
+tot_kernels2 = 32
+#tot_kernels3 = 128
 
 stride = (2, 2) #para MaxPooling
 
 clases = 3 #total de clases a clasificar
 
 lr = 0.0005 #learning rate  # 0.1 ---- 0.01   0.001  0.002
-
 
 
 #preprocesamiento de imagenes  --> aumento de datos...
@@ -84,17 +83,17 @@ cnn.add(Convolution2D(tot_kernels2, kernel2, padding='same', activation='relu'))
 ##capa 4
 cnn.add(MaxPooling2D(pool_size=stride))
 ##capa 5
-cnn.add(Convolution2D(tot_kernels3, kernel3, padding='same', activation='relu'))
+#cnn.add(Convolution2D(tot_kernels3, kernel3, padding='same', activation='relu'))
 ##capa 6
-cnn.add(MaxPooling2D(pool_size=stride))
+#cnn.add(MaxPooling2D(pool_size=stride))
 
 cnn.add(Flatten()) # aplana la informacion
 
 ##capa 7
-cnn.add(Dense(256, activation='relu')) #
+cnn.add(Dense(128, activation='relu')) #
 
 # 0.2 - 0.6
-cnn.add(Dropout(0.5)) #porcentaje de neuronas apagadas en cada paso (0.5 = 50%)
+cnn.add(Dropout(0.2)) #porcentaje de neuronas apagadas en cada paso (0.5 = 50%)
 # permite aprender caminos alternos para clasificar.. evita sobreentrenamiento
 
 #capa 8 - salida
@@ -107,7 +106,7 @@ cnn.compile(loss='categorical_crossentropy', optimizer=optimizers.Adam(learning_
 #entrena el modelo de la red neuronal
 cnn.fit(imagen_entrenamiento, steps_per_epoch=pasos, epochs=epocas, validation_data= imagen_validacion, validation_steps=pasos_validacion)
 
-dir = "/modelo/"
+dir = "../E2_ConvolutionalNeuronalNetwork/modelo/"
 if not os.path.exists(dir):
     os.mkdir(dir)
 #version antigua

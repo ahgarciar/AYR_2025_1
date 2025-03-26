@@ -16,9 +16,9 @@ print(img_a_convolucinar.shape)
 
 
 kernel = [
-    [-3, 0, 1],
-    [0, 5, 0],
-    [-3, 0, 1]
+    [-2, 1, -2],
+    [1,  5,  1],
+    [-2, 1, -2]
 ]
 
 """
@@ -51,7 +51,7 @@ for filas in range(1,alto-1): #ignora los pixeles de la primera y ultima fila
                 pixelConvulucionado += (kernel[f_kernel][c_kernel]
                                         * img_a_convolucinar[filas + (f_kernel-1)][columnas+(c_kernel-1)])
 
-        pixelConvulucionado = pixelConvulucionado * (1/9)
+        pixelConvulucionado = pixelConvulucionado * (1/5)
         new_fila.append(pixelConvulucionado)
 
     img_convolucionada.append(new_fila)

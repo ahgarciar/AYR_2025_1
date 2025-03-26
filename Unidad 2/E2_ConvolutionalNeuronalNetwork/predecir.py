@@ -7,15 +7,15 @@ from keras.utils import load_img, img_to_array #alternative 2
 
 from keras.models import load_model
 
-alto, largo = 500, 500
-modelo = "../E2_ConvolutionalNeuronalNetwork/modelo/modelo.h5" #./modelo/modelo.h5'
-pesos = '../E2_ConvolutionalNeuronalNetwork/modelo/modelo.h5'
+alto, largo = 150, 150
+modelo = "../E2_ConvolutionalNeuronalNetwork/modelo/modelo.keras" #./modelo/modelo.h5'
+pesos = '../E2_ConvolutionalNeuronalNetwork/modelo/modelo.keras'
 
 cnn = load_model(modelo)
 cnn.load_weights(pesos)
 
 def predict(file):
-    imagen_a_predecir = load_img(file, target_size = (alto, largo))
+    imagen_a_predecir = load_img(file, target_size = (alto, largo), color_mode = "grayscale")
     imagen_a_predecir = img_to_array(imagen_a_predecir)
     imagen_a_predecir = np.expand_dims(imagen_a_predecir, axis=0) #agrega una dimension adicional
     arreglo = cnn.predict(imagen_a_predecir) ## [[1,0,0,0,0,0]]
@@ -24,11 +24,11 @@ def predict(file):
 
     match respuesta:
         case 0:
-            return 'C1-GarciaRuiz'
+            return 'C1-Daniel'
         case 1:
-            return 'C2-Clase2'
+            return 'C2-Aaron'
         case 2:
-            return 'C3-Clase3'
+            return 'C3-Eduardo'
         case _:
             return '----'
 
@@ -49,7 +49,7 @@ def get_folders_name_from(from_location):
 
 
 def probar_red_neuronal():
-    base_location = "../E2_ConvolutionalNeuronalNetwork/F3-Prueba " #'./F3-Prueba/'
+    base_location = "../E2_ConvolutionalNeuronalNetwork/F3-Prueba/" #'./F3-Prueba/'
 
     folders = get_folders_name_from(base_location)
 
